@@ -76,7 +76,7 @@ export default function Hero() {
             </button>
           </div>
 
-          <div className="grid grid-cols-3 gap-8 mt-20 max-w-3xl mx-auto">
+          {/* <div className="grid grid-cols-3 gap-8 mt-20 max-w-3xl mx-auto">
             <div>
               <div className="text-4xl font-bold text-emerald-400 mb-2">50+</div>
               <div className="text-slate-400">Event Sukses</div>
@@ -89,7 +89,7 @@ export default function Hero() {
               <div className="text-4xl font-bold text-emerald-400 mb-2">24/7</div>
               <div className="text-slate-400">Support</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
