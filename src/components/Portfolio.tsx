@@ -15,7 +15,7 @@ export default function Portfolio() {
       tags: ['React', 'Node.js', 'PostgreSQL']
     },
     {
-      title: 'Website Booking & Jastip Platform',
+      title: 'Website Company Profile',
       category: 'Web App',
       description: 'Penyediaan website profil perusahaan dengan fitur interaktif dan SEO optimasi.',
       image: 'https://i.top4top.io/p_3654gyg2k1.png',
