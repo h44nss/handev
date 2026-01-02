@@ -71,7 +71,7 @@ export default function Contact() {
             </h3>
 
             <div className="space-y-6">
-              <div className="flex items-start space-x-4">
+              {/* <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-emerald-400 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
@@ -85,7 +85,7 @@ export default function Contact() {
                     support@eventregpro.com
                   </a>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-emerald-400 rounded-lg flex items-center justify-center flex-shrink-0">
