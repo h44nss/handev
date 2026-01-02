@@ -3,76 +3,76 @@ import { ExternalLink, Calendar, Users, CheckCircle } from 'lucide-react';
 export default function Portfolio() {
   const projects = [
     {
-      title: 'Tech Conference 2024',
-      category: 'Sistem Registrasi',
-      description: 'Sistem registrasi online untuk konferensi teknologi dengan 2000+ peserta, integrasi payment gateway, dan QR code check-in.',
-      image: 'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Sistem Input Data Pajak',
+      category: 'Web App',
+      description: 'Sistem Input Data Pajak, Sudah lenkap dengan data laporan yang bisa di ekspor.',
+      image: 'https://g.top4top.io/p_3654s4u6k1.jpeg',
       stats: [
-        { icon: Users, label: '2,000+ Peserta' },
-        { icon: Calendar, label: '3 Hari Event' },
-        { icon: CheckCircle, label: '99.8% Uptime' }
+        { icon: Users, label: '10' } 
+        // { icon: Calendar, label: '3 Hari Event' },
+        // { icon: CheckCircle, label: '99.8% Uptime' }
       ],
-      tags: ['Web App', 'Payment Gateway', 'QR System']
+      tags: ['React', 'Node.js', 'PostgreSQL']
     },
     {
-      title: 'Corporate Annual Meeting',
-      category: 'IT Support & Crew',
-      description: 'Penyediaan crew IT dan event staff untuk pertemuan tahunan perusahaan multinasional dengan setup hybrid streaming.',
-      image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=800',
-      stats: [
-        { icon: Users, label: '15 Staff IT' },
-        { icon: Calendar, label: '2 Hari Event' },
-        { icon: CheckCircle, label: 'Hybrid Event' }
-      ],
-      tags: ['IT Support', 'Live Streaming', 'Event Crew']
+      title: 'Website Booking & Jastip Platform',
+      category: 'Web App',
+      description: 'Penyediaan website profil perusahaan dengan fitur interaktif dan SEO optimasi.',
+      image: 'https://i.top4top.io/p_3654gyg2k1.png',
+       stats: [
+      //   { icon: Users, label: '15 Staff IT' },
+      //   { icon: Calendar, label: '2 Hari Event' },
+      //   { icon: CheckCircle, label: 'Hybrid Event' }
+     ],
+      tags: ['React', 'Tailwind CSS', 'SEO']
     },
     {
-      title: 'Music Festival Registration',
-      category: 'Sistem Registrasi',
+      title: 'Website Booking & Jastip Platform',
+      category: 'Web App',
       description: 'Platform registrasi dan ticketing untuk festival musik dengan sistem tier pricing dan early bird promotion.',
-      image: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: 'https://g.top4top.io/p_3654cemqc1.png',
       stats: [
-        { icon: Users, label: '5,000+ Tiket' },
-        { icon: Calendar, label: '1 Hari Event' },
-        { icon: CheckCircle, label: 'Sold Out' }
+        // { icon: Users, label: '5,000+ Tiket' },
+        // { icon: Calendar, label: '1 Hari Event' },
+        // { icon: CheckCircle, label: 'Sold Out' }
       ],
-      tags: ['E-Ticket', 'Tier Pricing', 'Mobile App']
+      tags: ['Laravel', 'PHP', 'MySQL']
     },
     {
-      title: 'Startup Summit 2024',
-      category: 'Full Package',
-      description: 'Paket lengkap: sistem registrasi, crew IT on-site, dan event staff untuk summit startup dengan 50+ speakers.',
-      image: 'https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Catalog Food',
+      category: 'Web App',
+      description: 'Sistem katalog makanan untuk umkm dengan fitur manajemen menu dan pemesanan online.',
+      image: 'https://d.top4top.io/p_3654s0pe61.png',
       stats: [
-        { icon: Users, label: '1,500 Peserta' },
-        { icon: Calendar, label: '2 Hari Event' },
-        { icon: CheckCircle, label: '50+ Speakers' }
+        // { icon: Users, label: '1,500 Peserta' },
+        // { icon: Calendar, label: '2 Hari Event' },
+        // { icon: CheckCircle, label: '50+ Speakers' }
       ],
-      tags: ['Full Service', 'Dashboard', 'Staff Management']
+      tags: ['laravel', 'PHP', 'MySQL']
     },
     {
-      title: 'Wedding Expo Registration',
-      category: 'Sistem Registrasi',
-      description: 'Sistem RSVP dan guest management untuk pameran pernikahan dengan fitur seating arrangement digital.',
-      image: 'https://images.pexels.com/photos/2306203/pexels-photo-2306203.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Lotery ',
+      category: 'Web App',
+      description: 'Sistem lotere online untuk event ',
+      image: 'https://d.top4top.io/p_36547pe9w1.png',
       stats: [
-        { icon: Users, label: '800 Guests' },
-        { icon: Calendar, label: '1 Hari Event' },
-        { icon: CheckCircle, label: 'RSVP System' }
+        // { icon: Users, label: '800 Guests' },
+        // { icon: Calendar, label: '1 Hari Event' },
+        // { icon: CheckCircle, label: 'RSVP System' }
       ],
-      tags: ['RSVP', 'Seating', 'Guest List']
+      tags: ['laravel', 'PHP', 'MySQL']
     },
     {
-      title: 'E-Sports Tournament',
-      category: 'IT Support & Crew',
-      description: 'Tim IT dan crew untuk tournament e-sports dengan setup streaming, network infrastructure, dan technical support.',
-      image: 'https://images.pexels.com/photos/3945683/pexels-photo-3945683.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Book Catalog',
+      category: 'Website',
+      description: 'Mahasiswa membuat website katalog buku sederhana sebagai proyek akhir kuliah.',
+      image: 'https://e.top4top.io/p_36543abcc2.png',
       stats: [
-        { icon: Users, label: '20 Staff' },
-        { icon: Calendar, label: '3 Hari Event' },
-        { icon: CheckCircle, label: '100k Viewers' }
+        // { icon: Users, label: '20 Staff' },
+        // { icon: Calendar, label: '3 Hari Event' },
+        // { icon: CheckCircle, label: '100k Viewers' }
       ],
-      tags: ['Network Setup', 'Streaming', 'Gaming']
+      tags: ['laravel', 'PHP', 'MySQL'  ]
     }
   ];
 
