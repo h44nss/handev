@@ -49,16 +49,16 @@ export default function Hero() {
       <div id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-block mb-4 px-4 py-2 bg-emerald-400/10 border border-emerald-400/30 rounded-full">
-            <span className="text-emerald-400 font-medium">Solusi Digital Untuk Event Anda</span>
+            <span className="text-emerald-400 font-medium">Solusi Digital Untuk Bisnis Anda</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Sistem Registrasi Event<br />
+            Jasa Pembuatan Website<br />
             <span className="text-emerald-400">Yang Powerful & Efisien</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Kami menyediakan sistem registrasi event custom, tim IT freelancer profesional, dan crew event berpengalaman untuk mensukseskan acara Anda.
+            Kami menyediakan sistem registrasi event custom, jasa pembuatan website profesional, tim IT freelancer berpengalaman, serta crew event yang siap mendukung dan mensukseskan acara Anda dari awal hingga akhir.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
