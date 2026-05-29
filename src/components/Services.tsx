@@ -1,160 +1,175 @@
-import { Globe, Users, Wrench, Code } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { Code2, LayoutDashboard, Rocket, Wrench, TestTube, Radio } from 'lucide-react';
 
-export default function Services() {
-  const services = [
-    {
-      icon: Globe,
-      title: 'Sistem Registrasi Event',
-      description: 'Pembuatan website dan sistem registrasi event custom dengan fitur lengkap: pendaftaran online, pembayaran digital, QR code check-in, dashboard analytics real-time, dan integrasi dengan berbagai payment gateway.',
-      features: [
-        'Custom design sesuai branding',
-        'Dashboard admin lengkap',
-        'Payment gateway integration',
-        'QR code & e-ticket',
-        'Email automation',
-        'Data analytics & reporting'
-      ],
-      color: 'emerald'
-    },
-    {
-      icon: Users,
-      title: 'Freelancer Crew IT untuk Event',
-      description: 'Tim IT profesional siap membantu event Anda: setup networking, troubleshooting teknis, live streaming support, digital signage, dan technical support on-site untuk memastikan kelancaran event dari sisi teknologi.',
-      features: [
-        'Network & infrastructure setup',
-        'Live streaming support',
-        'Technical troubleshooting',
-        'Digital signage management',
-        'Audio visual support',
-        'On-site IT coordination'
-      ],
-      color: 'blue'
-    },
-    {
-      icon: Wrench,
-      title: 'Crew Event Profesional',
-      description: 'Crew event berpengalaman untuk berbagai kebutuhan: registration desk, ushering, event coordination, crowd management, dan support staff yang terlatih untuk memastikan event berjalan lancar dan profesional.',
-      features: [
-        'Registration desk staff',
-        'Event usher & coordinator',
-        'Crowd management',
-        'Guest assistance',
-        'Protocol staff',
-        'Event support team'
-      ],
-      color: 'orange'
-    },
-    {
-      icon: Code,
-      title: 'Pembuatan Website Lainnya',
-      description: 'Jasa pembuatan website custom untuk berbagai kebutuhan bisnis: e-commerce, corporate website, blog, portfolio, aplikasi web, dan integrasi sistem. Desain modern, responsive, dan SEO-friendly.',
-      features: [
-        'E-commerce solutions',
-        'Corporate website',
-        'Web application',
-        'Responsive design',
-        'SEO optimization',
-        'Maintenance & support'
-      ],
-      color: 'rose'
-    }
-  ];
+const services = [
+  {
+    icon: Code2,
+    title: 'Web Development',
+    desc: 'Clean, performant web applications built with modern frameworks. From MVPs to production-grade systems.',
+    tags: ['React', 'TypeScript', 'Next.js', 'Laravel'],
+    index: '01',
+  },
+  {
+    icon: LayoutDashboard,
+    title: 'Dashboard Systems',
+    desc: 'Data-rich admin panels and internal dashboards that make complex information intuitive and actionable.',
+    tags: ['Charts', 'Data Tables', 'Filters', 'Export'],
+    index: '02',
+  },
+  {
+    icon: Rocket,
+    title: 'Landing Pages',
+    desc: 'High-converting, visually striking landing pages crafted for campaigns, products, and brand launches.',
+    tags: ['SEO', 'Animation', 'CRO', 'Speed'],
+    index: '03',
+  },
+  {
+    icon: Wrench,
+    title: 'Internal Tools',
+    desc: 'Custom-built tools that streamline workflows, automate tasks, and empower teams to move faster.',
+    tags: ['CRUD', 'Forms', 'API', 'Auth'],
+    index: '04',
+  },
+  {
+    icon: TestTube,
+    title: 'QA Testing',
+    desc: 'Systematic quality assurance — manual and automated — ensuring your product ships bug-free and reliable.',
+    tags: ['Test Plans', 'Bug Reports', 'Regression', 'UAT'],
+    index: '05',
+  },
+  {
+    icon: Radio,
+    title: 'IT Event Operations',
+    desc: 'End-to-end IT support for events: registration systems, live infrastructure, ticketing, and on-site tech.',
+    tags: ['Events', 'Live Systems', 'Ticketing', 'Support'],
+    index: '06',
+  },
+];
 
-  const getColorClasses = (color: string) => {
-    const colors = {
-      emerald: {
-        bg: 'bg-emerald-50',
-        icon: 'bg-emerald-400',
-        text: 'text-emerald-400',
-        border: 'border-emerald-200',
-        hover: 'hover:border-emerald-400'
-      },
-      blue: {
-        bg: 'bg-blue-50',
-        icon: 'bg-blue-400',
-        text: 'text-blue-400',
-        border: 'border-blue-200',
-        hover: 'hover:border-blue-400'
-      },
-      orange: {
-        bg: 'bg-orange-50',
-        icon: 'bg-orange-400',
-        text: 'text-orange-400',
-        border: 'border-orange-200',
-        hover: 'hover:border-orange-400'
-      },
-      rose: {
-        bg: 'bg-rose-50',
-        icon: 'bg-rose-400',
-        text: 'text-rose-400',
-        border: 'border-rose-200',
-        hover: 'hover:border-rose-400'
-      }
-    };
-    return colors[color as keyof typeof colors];
-  };
+function useIntersect(ref: React.RefObject<Element | null>) {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    const els = ref.current?.querySelectorAll('.fade-up, .fade-in');
+    els?.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [ref]);
+}
+
+export default function Services({ dark }: { dark: boolean }) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  useIntersect(sectionRef);
 
   return (
-    <section id="services" className="py-24 px-6 bg-slate-50">
+    <section
+      id="services"
+      ref={sectionRef}
+      className="py-28 px-6 md:px-12 lg:px-20 relative"
+      style={{ background: 'var(--bg-secondary)' }}
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <div className="inline-block mb-4 px-4 py-2 bg-emerald-400/10 border border-emerald-400/30 rounded-full">
-            <span className="text-emerald-600 font-medium">Layanan Kami</span>
+        {/* Header */}
+        <div className="grid md:grid-cols-2 gap-10 mb-20 items-end">
+          <div>
+            <div className="flex items-center gap-3 mb-4 fade-up">
+              <span className="font-satoshi text-xs tracking-widest uppercase" style={{ color: 'var(--accent)' }}>Services</span>
+              <div className="h-px w-16" style={{ background: 'var(--accent)', opacity: 0.4 }} />
+            </div>
+            <h2 className="font-clash text-section font-bold fade-up delay-100" style={{ color: 'var(--text-primary)' }}>
+              How I can
+              <br />
+              <span className="italic font-display" style={{ color: 'var(--accent)' }}>help you.</span>
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Solusi Digital & Event Profesional
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Dari sistem registrasi event, website custom, hingga tim profesional - kami siap membantu kesuksesan Anda
+          <p className="font-satoshi text-lg leading-relaxed fade-up delay-200" style={{ color: 'var(--muted)' }}>
+            Not just a developer — a thinking partner. I bring technical depth and creative sensibility to every engagement, whether it's a 2-day sprint or a 3-month build.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => {
-            const colorClasses = getColorClasses(service.color);
+        {/* Services Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {services.map((service, i) => {
             const Icon = service.icon;
-
             return (
               <div
-                key={index}
-                className={`bg-white rounded-2xl p-8 border-2 ${colorClasses.border} ${colorClasses.hover} transition-all hover:shadow-xl group`}
+                key={service.title}
+                className={`group relative rounded-3xl p-7 bento-card fade-up transition-all duration-500 cursor-default overflow-hidden ${
+                  dark ? 'bg-dark-card border border-dark-border' : 'bg-white/50 border border-warm-glow/15'
+                }`}
+                style={{ backdropFilter: 'blur(12px)', transitionDelay: `${i * 70}ms` }}
               >
-                <div className={`w-16 h-16 ${colorClasses.icon} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <Icon className="w-8 h-8 text-white" />
+                {/* Index number watermark */}
+                <span
+                  className="absolute top-4 right-6 font-clash font-bold text-6xl opacity-[0.04] select-none transition-opacity duration-500 group-hover:opacity-[0.08]"
+                  style={{ color: 'var(--accent)' }}
+                >
+                  {service.index}
+                </span>
+
+                {/* Icon */}
+                <div
+                  className="w-11 h-11 rounded-2xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110"
+                  style={{ background: 'rgba(201,123,99,0.12)' }}
+                >
+                  <Icon size={20} style={{ color: 'var(--accent)' }} />
                 </div>
 
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                {/* Text */}
+                <h3 className="font-clash font-semibold text-lg mb-3 transition-colors duration-300 group-hover:text-warm-accent" style={{ color: 'var(--text-primary)' }}>
                   {service.title}
                 </h3>
-
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  {service.description}
+                <p className="font-satoshi text-sm leading-relaxed mb-5" style={{ color: 'var(--muted)' }}>
+                  {service.desc}
                 </p>
 
-                <div className="space-y-3">
-                  <div className="font-semibold text-slate-900 mb-3">Fitur & Layanan:</div>
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start space-x-2">
-                      <div className={`w-1.5 h-1.5 ${colorClasses.icon} rounded-full mt-2`}></div>
-                      <span className="text-slate-600 text-sm">{feature}</span>
-                    </div>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {service.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-1 rounded-lg text-xs font-satoshi font-medium"
+                      style={{ background: dark ? 'rgba(255,255,255,0.05)' : 'rgba(94,70,54,0.07)', color: 'var(--muted)' }}
+                    >
+                      {tag}
+                    </span>
                   ))}
                 </div>
+
+                {/* Hover border glow */}
+                <div
+                  className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ boxShadow: 'inset 0 0 0 1px rgba(201,123,99,0.35)' }}
+                />
               </div>
             );
           })}
         </div>
 
-        <div className="mt-16 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white">
-          <h3 className="text-3xl font-bold mb-4">Butuh Kombinasi Layanan?</h3>
-          <p className="text-slate-300 text-lg mb-8 max-w-2xl mx-auto">
-            Kami menyediakan paket bundling yang lebih hemat untuk kombinasi layanan. Hubungi kami untuk mendapatkan penawaran khusus!
-          </p>
+        {/* CTA Block */}
+        <div
+          className={`mt-10 rounded-3xl p-8 md:p-12 fade-up delay-400 flex flex-col md:flex-row items-center justify-between gap-6 ${
+            dark ? 'bg-dark-card border border-dark-border' : 'bg-white/60 border border-warm-glow/20'
+          }`}
+          style={{ backdropFilter: 'blur(12px)' }}
+        >
+          <div>
+            <h3 className="font-clash font-bold text-2xl mb-2" style={{ color: 'var(--text-primary)' }}>
+              Have a project in mind?
+            </h3>
+            <p className="font-satoshi" style={{ color: 'var(--muted)' }}>
+              Let's explore what we can build together.
+            </p>
+          </div>
           <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-emerald-400 text-slate-900 rounded-lg font-semibold hover:bg-emerald-300 transition-all transform hover:scale-105 shadow-lg"
+            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="flex-shrink-0 px-8 py-3.5 rounded-2xl font-satoshi font-semibold text-white transition-all duration-300 magnetic whitespace-nowrap"
+            style={{ background: 'var(--accent)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--brown)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent)'; }}
           >
-            Diskusi Paket Custom
+            Start a Conversation
           </button>
         </div>
       </div>

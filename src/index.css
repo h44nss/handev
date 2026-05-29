@@ -1,3 +1,370 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── DESIGN TOKENS ─── */
+:root {
+  --bg-primary: #F5EFE6;
+  --bg-secondary: #E8DFD1;
+  --text-primary: #2B2B2B;
+  --accent: #C97B63;
+  --brown: #5E4636;
+  --glow: #D8B08C;
+  --muted: #9A8878;
+}
+
+/* ─── BASE ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'General Sans', 'Inter', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── DARK MODE ─── */
+body.dark {
+  --bg-primary: #1B1A17;
+  --bg-secondary: #2A2622;
+  --text-primary: #F3EDE4;
+  --accent: #D6A77A;
+  --brown: #C9A882;
+  --glow: #D6A77A;
+  --muted: #7A6E65;
+  background-color: #1B1A17;
+  color: #F3EDE4;
+}
+
+/* ─── CUSTOM SCROLLBAR ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brown);
+}
+
+/* ─── GRAIN TEXTURE OVERLAY ─── */
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 160px;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+/* ─── SELECTION COLOR ─── */
+::selection {
+  background: rgba(201, 123, 99, 0.25);
+  color: var(--text-primary);
+}
+
+/* ─── SMOOTH SECTION TRANSITIONS ─── */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── GLASS MORPHISM UTILITIES ─── */
+.glass {
+  background: rgba(245, 239, 230, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 123, 99, 0.15);
+}
+
+.glass-dark {
+  background: rgba(42, 38, 34, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(214, 167, 122, 0.15);
+}
+
+/* ─── MAGNETIC BUTTON EFFECT ─── */
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── TEXT GRADIENT ─── */
+.text-gradient {
+  background: linear-gradient(135deg, #C97B63, #5E4636, #D8B08C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(135deg, #D8B08C, #C97B63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── GLOW EFFECTS ─── */
+.glow-warm {
+  box-shadow: 0 0 40px rgba(201, 123, 99, 0.2), 0 0 80px rgba(201, 123, 99, 0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 40px rgba(216, 176, 140, 0.4);
+}
+
+/* ─── UNDERLINE ANIMATION ─── */
+.underline-anim {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-anim::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.underline-anim:hover::after {
+  width: 100%;
+}
+
+/* ─── PARALLAX HELPER ─── */
+.parallax-slow {
+  will-change: transform;
+}
+
+/* ─── FADE IN UTILITIES ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
+
+/* ─── STAGGER DELAYS ─── */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+.delay-400 {
+  transition-delay: 0.4s;
+}
+
+.delay-500 {
+  transition-delay: 0.5s;
+}
+
+.delay-600 {
+  transition-delay: 0.6s;
+}
+
+/* ─── MARQUEE ─── */
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  animation: marquee 25s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-loop {
+  width: max-content;
+  animation: marqueeMove 28s linear infinite;
+}
+
+.marquee-loop:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── NOISE GRADIENT BLOB ─── */
+.blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  filter: blur(40px);
+  opacity: 0.5;
+  animation: float 8s ease-in-out infinite;
+}
+
+/* ─── BENTO CARD HOVER ─── */
+.bento-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(94, 70, 54, 0.12);
+}
+
+/* ─── PROJECT CARD ─── */
+.project-card {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+}
+
+.project-card .project-overlay {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── CUSTOM CURSOR (Optional Enhancement) ─── */
+@keyframes cursorPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+}
+
+/* ─── STATUS PULSE ─── */
+.status-pulse {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.status-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: #4ade80;
+  opacity: 0.3;
+  animation: pulseRing 2s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ─── TYPOGRAPHY UTILITIES ─── */
+.font-clash {
+  font-family: 'Clash Display', sans-serif;
+}
+
+.font-satoshi {
+  font-family: 'Satoshi', sans-serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ─── HORIZONTAL LINE DECORATION ─── */
+.hr-deco {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.3;
+}
+
+/* ─── RESPONSIVE TYPOGRAPHY ─── */
+.text-hero {
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.text-section {
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ─── NOISE OVERLAY ─── */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}

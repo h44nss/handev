@@ -1,99 +1,460 @@
-import { Menu, X, Code2 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowDown, Sparkles, Zap } from 'lucide-react';
 
-export default function Hero() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function Hero({
+  dark,
+}: {
+  dark: boolean;
+}) {
+  const containerRef =
+    useRef<HTMLDivElement>(null);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
-  };
+  const [mousePos, setMousePos] =
+    useState({
+      x: 0,
+      y: 0,
+    });
+
+  const [visible, setVisible] =
+    useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(
+      () => setVisible(true),
+      100
+    );
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleMouse = (
+      e: MouseEvent
+    ) => {
+      setMousePos({
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight,
+      });
+    };
+
+    window.addEventListener(
+      'mousemove',
+      handleMouse
+    );
+
+    return () =>
+      window.removeEventListener(
+        'mousemove',
+        handleMouse
+      );
+  }, []);
+
+  const parallaxX =
+    (mousePos.x - 0.5) * 30;
+
+  const parallaxY =
+    (mousePos.y - 0.5) * 20;
 
   return (
-    <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <nav className="absolute w-full z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Code2 className="w-8 h-8 text-emerald-400" />
-            <span className="text-2xl font-bold">Han<span className="text-emerald-400">Dev</span></span>
+    <section
+      id="hero"
+      ref={containerRef}
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      style={{
+        background:
+          'var(--bg-primary)',
+      }}
+    >
+      {/* Background blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute animate-float"
+          style={{
+            width: '600px',
+            height: '600px',
+            background:
+              'radial-gradient(circle, rgba(201,123,99,0.18) 0%, transparent 70%)',
+            top: '-100px',
+            right: '-100px',
+            transform: `translate(${parallaxX * 0.4
+              }px, ${parallaxY * 0.4}px)`,
+            transition:
+              'transform 0.5s ease-out',
+            borderRadius:
+              '60% 40% 30% 70% / 60% 30% 70% 40%',
+          }}
+        />
+
+        <div
+          className="absolute animate-float-slow"
+          style={{
+            width: '400px',
+            height: '400px',
+            background:
+              'radial-gradient(circle, rgba(216,176,140,0.2) 0%, transparent 70%)',
+            bottom: '0px',
+            left: '-50px',
+            transform: `translate(${-parallaxX * 0.3
+              }px, ${-parallaxY * 0.3}px)`,
+            transition:
+              'transform 0.6s ease-out',
+            borderRadius:
+              '30% 60% 70% 40% / 50% 60% 30% 60%',
+          }}
+        />
+
+        <div
+          className="absolute animate-float-slower"
+          style={{
+            width: '300px',
+            height: '300px',
+            background:
+              'radial-gradient(circle, rgba(94,70,54,0.1) 0%, transparent 70%)',
+            top: '40%',
+            left: '40%',
+            transform: `translate(${parallaxX * 0.2
+              }px, ${parallaxY * 0.2}px)`,
+            transition:
+              'transform 0.7s ease-out',
+          }}
+        />
+      </div>
+
+      {/* Floating Card 1 */}
+      <div
+        className={`hidden sm:block absolute top-24 md:top-32 right-4 md:right-24 transition-all duration-1000 ${visible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-8'
+          }`}
+        style={{
+          transitionDelay: '0.8s',
+        }}
+      >
+        <div
+          className={`rounded-2xl p-4 animate-float ${dark
+            ? 'bg-dark-card border border-dark-border'
+            : 'bg-white/70 border border-warm-glow/30'
+            }`}
+          style={{
+            backdropFilter:
+              'blur(12px)',
+            boxShadow:
+              '0 8px 32px rgba(201,123,99,0.1)',
+          }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <span className="status-pulse w-2 h-2 rounded-full bg-green-400 block" />
+
+            <span
+              className="text-xs font-satoshi"
+              style={{
+                color:
+                  'var(--muted)',
+              }}
+            >
+              Available for work
+            </span>
           </div>
 
-          <div className="hidden md:flex space-x-8">
-            <button onClick={() => scrollToSection('home')} className="hover:text-emerald-400 transition-colors">Home</button>
-            <button onClick={() => scrollToSection('services')} className="hover:text-emerald-400 transition-colors">Layanan</button>
-            <button onClick={() => scrollToSection('portfolio')} className="hover:text-emerald-400 transition-colors">Portfolio</button>
-            <button onClick={() => scrollToSection('contact')} className="hover:text-emerald-400 transition-colors">Kontak</button>
+          <p
+            className="text-xs font-satoshi font-medium"
+            style={{
+              color:
+                'var(--text-primary)',
+            }}
+          >
+            Open to freelance &
+            collab
+          </p>
+        </div>
+      </div>
+
+      {/* Floating Card 2 */}
+      <div
+        className={`hidden md:block absolute bottom-36 right-4 md:right-20 transition-all duration-1000 ${visible
+          ? 'opacity-100 translate-x-0'
+          : 'opacity-0 translate-x-8'
+          }`}
+        style={{
+          transitionDelay: '1.1s',
+        }}
+      >
+        <div
+          className={`rounded-2xl p-3 animate-float-slow ${dark
+            ? 'bg-dark-card border border-dark-border'
+            : 'bg-warm-bg2/80 border border-warm-glow/20'
+            }`}
+          style={{
+            backdropFilter:
+              'blur(8px)',
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <Sparkles
+              size={14}
+              className="text-warm-accent"
+            />
+
+            <span
+              className="text-xs font-satoshi font-medium"
+              style={{
+                color:
+                  'var(--muted)',
+              }}
+            >
+              Creative × Technical
+            </span>
           </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto w-full pt-24 pb-16">
+        {/* Label */}
+        <div
+          className={`flex items-center gap-2 mb-8 transition-all duration-800 ${visible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-6'
+            }`}
+          style={{
+            transitionDelay: '0.1s',
+          }}
+        >
+          <div
+            className="h-px w-12"
+            style={{
+              background:
+                'var(--accent)',
+            }}
+          />
+
+          <span
+            className="font-satoshi text-sm tracking-widest uppercase"
+            style={{
+              color:
+                'var(--accent)',
+            }}
+          >
+            Creative Technologist
+          </span>
+        </div>
+
+        {/* Headline */}
+        <h1
+          className={`font-clash text-hero font-bold leading-none mb-6 transition-all duration-1000 ${visible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-10'
+            }`}
+          style={{
+            color:
+              'var(--text-primary)',
+            transitionDelay: '0.2s',
+          }}
+        >
+          Crafting{' '}
+          <span className="text-gradient">
+            warm
+          </span>
+
+          <br />
+
+          <span
+            className="italic font-display"
+            style={{
+              color:
+                'var(--accent)',
+            }}
+          >
+            digital
+          </span>{' '}
+          experiences
+
+          <br />
+
+          <span className="relative">
+            that feel
+
+            <span className="text-gradient-warm">
+              {' '}
+              human.
+            </span>
+          </span>
+        </h1>
+
+        {/* Subtext */}
+        <p
+          className={`max-w-xl font-satoshi text-base md:text-lg leading-relaxed mb-12 transition-all duration-1000 ${visible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-8'
+            }`}
+          style={{
+            color: 'var(--muted)',
+            transitionDelay: '0.4s',
+          }}
+        >
+          I build interfaces,
+          systems, and tools where
+          technology meets
+          thoughtful design —
+          bridging frontend craft,
+          QA precision, and IT
+          operations into one
+          seamless experience.
+        </p>
+
+        {/* CTA */}
+        <div
+          className={`flex flex-wrap items-center gap-4 transition-all duration-1000 ${visible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-8'
+            }`}
+          style={{
+            transitionDelay: '0.6s',
+          }}
+        >
+          <button
+            onClick={() =>
+              document
+                .querySelector(
+                  '#projects'
+                )
+                ?.scrollIntoView({
+                  behavior:
+                    'smooth',
+                })
+            }
+            className="group flex items-center gap-3 px-7 py-3.5 rounded-2xl font-satoshi font-semibold text-white transition-all duration-300"
+            style={{
+              background:
+                'var(--accent)',
+            }}
+          >
+            <span>
+              View My Work
+            </span>
+
+            <ArrowDown
+              size={16}
+              className="group-hover:translate-y-1 transition-transform"
+            />
+          </button>
 
           <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() =>
+              document
+                .querySelector(
+                  '#contact'
+                )
+                ?.scrollIntoView({
+                  behavior:
+                    'smooth',
+                })
+            }
+            className="flex items-center gap-2 px-7 py-3.5 rounded-2xl font-satoshi font-semibold transition-all duration-300 border"
+            style={{
+              color:
+                'var(--text-primary)',
+              borderColor:
+                'var(--accent)',
+            }}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <Zap size={15} />
+
+            <span>
+              Let's Collaborate
+            </span>
           </button>
         </div>
 
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-t border-slate-700 py-4">
-            <div className="flex flex-col space-y-4 px-6">
-              <button onClick={() => scrollToSection('home')} className="text-left hover:text-emerald-400 transition-colors">Home</button>
-              <button onClick={() => scrollToSection('services')} className="text-left hover:text-emerald-400 transition-colors">Layanan</button>
-              <button onClick={() => scrollToSection('portfolio')} className="text-left hover:text-emerald-400 transition-colors">Portfolio</button>
-              <button onClick={() => scrollToSection('contact')} className="text-left hover:text-emerald-400 transition-colors">Kontak</button>
-            </div>
-          </div>
-        )}
-      </nav>
+        {/* Marquee */}
+        <div
+          className={`mt-20 transition-all duration-1000 ${visible
+            ? 'opacity-100'
+            : 'opacity-0'
+            }`}
+          style={{
+            transitionDelay: '0.9s',
+          }}
+        >
+          <hr className="hr-deco mb-6" />
 
-      <div id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-block mb-4 px-4 py-2 bg-emerald-400/10 border border-emerald-400/30 rounded-full">
-            <span className="text-emerald-400 font-medium">Solusi Digital Untuk Event Anda</span>
-          </div>
+          <div className="relative overflow-hidden">
+            {/* fade left */}
+            <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[var(--bg-primary)] to-transparent pointer-events-none" />
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Sistem Registrasi Event<br />
-            <span className="text-emerald-400">Yang Powerful & Efisien</span>
-          </h1>
+            {/* fade right */}
+            <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[var(--bg-primary)] to-transparent pointer-events-none" />
 
-          <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Kami menyediakan sistem registrasi event custom, tim IT freelancer profesional, dan crew event berpengalaman untuk mensukseskan acara Anda.
-          </p>
+            <div className="flex marquee-loop gap-10 whitespace-nowrap">
+              {[
+                'Frontend Developer',
+                'QA Engineer',
+                'IT Operations',
+                'Creative Technologist',
+                'System Builder',
+                'UI Designer',
+                'Digital Craftsman',
+                'Experience Builder',
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="px-8 py-4 bg-emerald-400 text-slate-900 rounded-lg font-semibold hover:bg-emerald-300 transition-all transform hover:scale-105 shadow-lg shadow-emerald-400/50"
-            >
-              Mulai Konsultasi Gratis
-            </button>
-            <button
-              onClick={() => scrollToSection('portfolio')}
-              className="px-8 py-4 bg-slate-800 text-white rounded-lg font-semibold hover:bg-slate-700 transition-all border border-slate-700"
-            >
-              Lihat Portfolio
-            </button>
-          </div>
+                'Frontend Developer',
+                'QA Engineer',
+                'IT Operations',
+                'Creative Technologist',
+                'System Builder',
+                'UI Designer',
+                'Digital Craftsman',
+                'Experience Builder',
+              ].map(
+                (
+                  role,
+                  i
+                ) => (
+                  <span
+                    key={i}
+                    className="flex items-center gap-3 text-sm md:text-base font-satoshi whitespace-nowrap"
+                    style={{
+                      color:
+                        'var(--muted)',
+                    }}
+                  >
+                    {role}
 
-          <div className="grid grid-cols-3 gap-8 mt-20 max-w-3xl mx-auto">
-            <div>
-              <div className="text-4xl font-bold text-emerald-400 mb-2">50+</div>
-              <div className="text-slate-400">Event Sukses</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-emerald-400 mb-2">100+</div>
-              <div className="text-slate-400">Client Puas</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-emerald-400 mb-2">24/7</div>
-              <div className="text-slate-400">Support</div>
+                    <span
+                      style={{
+                        color:
+                          'var(--accent)',
+                      }}
+                    >
+                      ·
+                    </span>
+                  </span>
+                )
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-30 bg-gradient-to-t from-white to-transparent"></div>
-    </div>
+      {/* Scroll */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+        <div
+          className="w-px h-12"
+          style={{
+            background:
+              'linear-gradient(to bottom, var(--accent), transparent)',
+          }}
+        />
+
+        <span
+          className="text-xs font-satoshi tracking-widest uppercase"
+          style={{
+            color:
+              'var(--muted)',
+          }}
+        >
+          Scroll
+        </span>
+      </div>
+    </section>
   );
 }
