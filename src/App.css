@@ -43,22 +43,3 @@
 .read-the-docs {
   color: #888;
 }
-
-.marquee-loop {
-  width: max-content;
-  animation: marqueeMove 28s linear infinite;
-}
-
-.marquee-loop:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marqueeMove {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}

@@ -36,7 +36,7 @@ const projects = [
     tags: ['React', 'Tailwind', 'SEO'],
     category: 'Travel Platform',
     year: '2026',
-    url: 'https://redzone-yogz.vercel.app/',
+    url: 'https://pantipendaki.vercel.app/',
   },
 
   {
