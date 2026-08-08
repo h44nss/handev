@@ -32,7 +32,7 @@ export default function Footer({ dark }: { dark: boolean }) {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 pb-12" style={{ borderBottom: '1px solid rgba(243,237,228,0.08)' }}>
           <div>
             <div className="font-clash font-bold text-3xl mb-2">
-              handev<span style={{ color: '#C97B63' }}>.</span>
+              Hantech<span style={{ color: '#C97B63' }}>.</span>
             </div>
             <p className="font-satoshi text-sm max-w-xs leading-relaxed" style={{ color: 'rgba(243,237,228,0.5)' }}>
               Creative Technologist & Digital Experience Builder. Building warm digital things from Indonesia.
@@ -60,7 +60,7 @@ export default function Footer({ dark }: { dark: boolean }) {
             className="font-clash font-bold leading-none select-none opacity-[0.04]"
             style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', color: '#F3EDE4' }}
           >
-            HAN · DEV
+            HAN · TECH
           </p>
         </div>
 

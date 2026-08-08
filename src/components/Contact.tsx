@@ -12,13 +12,13 @@ const socials = [
     icon: Github,
     label: 'GitHub',
     href: 'https://github.com/h44nss',
-    handle: '@handev',
+    handle: '@Hantech',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/mohamad-burhan-b86401321/',
-    handle: 'Han Dev',
+    handle: 'Hantech',
   },
   {
     icon: MessageCircle,

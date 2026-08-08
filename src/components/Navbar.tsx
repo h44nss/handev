@@ -43,7 +43,7 @@ export default function Navbar({ dark, toggleDark }: NavbarProps) {
         <div className={`mx-auto transition-all duration-500 ${scrolled ? `mt-3 mx-4 md:mx-8 rounded-2xl ${dark ? 'bg-dark-card/80 backdrop-blur-xl border border-dark-border shadow-2xl' : 'bg-warm-bg/80 backdrop-blur-xl border border-warm-glow/20 shadow-lg'}` : 'px-6 py-0'}`}>
           <div className={`flex items-center justify-between h-16 ${scrolled ? 'px-5' : 'px-6 md:px-12 pt-4'}`}>
             <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="font-clash font-semibold text-lg tracking-tight" style={{ color: 'var(--text-primary)' }}>
-              handev<span className="text-warm-accent">.</span>
+              Hantech<span className="text-warm-accent">.</span>
             </button>
 
             <div className="hidden md:flex items-center gap-7">
